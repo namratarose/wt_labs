@@ -1,0 +1,114 @@
+<!-- 15. Write a Java script program to validate Name, Mobile Number, Email, Id and Password.
+ Name must contain alphabets and whitespace only
+ Mobile number must be 10 digits only.
+ Email Id must have one “@”, and domain name is
+“united.ac.in”
+ Password must have atleast one alphabet, one digit and
+one special character (!@#$%&*) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+</head>
+<body>
+    <form id="myForm">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>
+                    <input type="text" name="name" id="name">
+                </td>
+            </tr>
+            <tr>
+                <td>Mobile No.</td>
+                <td>
+                    <input type="number" name="mobile" id="mobile">
+                </td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>
+                    <input type="email" name="email" id="email">
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>
+                    <input type="password" name="password" id="password">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="sumbit">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+<script>
+    let myform=document.getElementById("myForm");
+    console.log(myform);
+    myform.addEventListener("submit",(e)=>{
+        e.preventDefault();
+        validateForm();
+    });
+    function validateForm(){
+        let name=document.getElementById("name").value;
+        let mobile=document.getElementById("mobile").value;
+        let trimNumber=mobile.trim();
+        let email=document.getElementById("email").value;
+        let password=document.getElementById("password").value.trim();  
+        let trimName=name.trim();  
+        
+        /*console.log(`Name is: ${trimName}`);
+        console.log(`Mobile is: ${mobile}`);
+        console.log(`Email is: ${email}`);
+        console.log(`Password is: ${password}`);
+        console.log(`Mobile number length is: ${trimNumber.length}`);*/
+        
+        
+
+        //variable for validation of Name
+        const nameRegex = /^[a-zA-Z\s]+$/;
+
+        //variable for validation of Email
+        const splitEmail=email.split("@");
+
+        //variable for validation of domain name
+        const domain=splitEmail.slice(-1);   //last index of array
+
+        //variable for validation of Password
+        const digitRegex = /\d/;
+        const specialCharRegex = /[!@#$%&*]/;
+        const alphabetRegex = /[a-zA-Z]/;
+        const hasAlphabet=alphabetRegex.test(password);
+        const hasDigit=digitRegex.test(password);
+        const hasSpecialChar=specialCharRegex.test(password);
+
+        //Name validation
+        if(trimName="")
+            alert("Name can not be empty");
+        if(!nameRegex.test(name))
+            alert("Name should contain only alphabet and whitespace only");
+
+        //Mobile number validation
+        if(trimNumber.length>10 && trimNumber.length<10)
+            alert("Moblie number length must be 10 digits only");
+
+        //Email validation
+        if(!email.includes('@'))
+            alert("Email should contain at least one @");
+        else if(!(domain=="united.ac.in"))
+            alert("Domain name should be 'united.ac.in'");
+
+        //Password validation
+        if(password=="")
+            alert("Password can not be blank");
+        else if(!(hasAlphabet && hasDigit && hasSpecialChar))
+            alert("Password must have atleast one alphabet, one digit and one special character (!@#$%&*)")
+    }        
+</script>
+</html>

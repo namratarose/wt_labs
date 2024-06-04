@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Changer</title>
+    <script>
+        function change(color){
+            document.body.style.backgroundColor=color;
+        }
+    </script>
+</head>
+<body>
+    <form name="f1">
+        <h1 >Background changer</h1>
+        <input type="button" value="red" id="red" name="b1" onclick="change(b1.value)">
+        <input type="button" value="green" id="green" name="b2" onclick="change(b2.value)">
+        <input type="button" value="yellow" id="yellow" name="b3" onclick="change(b3.value)">
+    </form>
+</body>
+</html>
